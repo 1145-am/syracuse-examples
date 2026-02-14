@@ -31,6 +31,28 @@ curl -X POST https://syracuse.1145.am/api/v1/register-and-get-key/ \
 
 This returns a JSON response with your API token. Verify your email to increase your rate limit from 30 to 300 queries/month.
 
+## Quick try with curl
+
+Don't want to clone the repo? Try the API directly (pipe to `jq .` for pretty-printing, or drop it for raw JSON):
+
+```bash
+# Fetch recent technology stories
+curl -s 'https://syracuse.1145.am/api/v1/stories/?industry=Technology&days_ago=7' \
+  -H 'Authorization: Token YOUR_API_KEY' | jq .
+
+# Search for stories about a specific company
+curl -s 'https://syracuse.1145.am/api/v1/stories/organization/?org_name=Microsoft' \
+  -H 'Authorization: Token YOUR_API_KEY' | jq .
+
+# Browse available industry clusters
+curl -s 'https://syracuse.1145.am/api/v1/industry-clusters/?search=technology' \
+  -H 'Authorization: Token YOUR_API_KEY' | jq .
+
+# Filter by industry and location together
+curl -s 'https://syracuse.1145.am/api/v1/stories/industry-location/?industry=Technology&location=US' \
+  -H 'Authorization: Token YOUR_API_KEY' | jq .
+```
+
 ## Quick start
 
 ```bash
