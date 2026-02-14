@@ -1,15 +1,16 @@
-"""Industry cluster examples.
+"""Industry cluster examples (httpx).
 
 Browse and search industry classifications, then filter stories by industry.
 
 Industry clusters have a hierarchical structure with topic_id identifiers
 and representative_doc names (e.g. ["Appliance Services", "Appliance Care"]).
 
-Usage: uv run python examples/industries.py
+Usage: uv run python examples/httpx/industries.py
 """
 
 import os
 
+import httpx
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,11 +20,9 @@ API_KEY = os.environ["SYRACUSE_API_KEY"]
 HEADERS = {"Authorization": f"Token {API_KEY}"}
 
 
-def list_industry_clusters_httpx():
-    """List available industry clusters using httpx."""
-    import httpx
-
-    print("=== Industry clusters — httpx ===\n")
+def list_industry_clusters():
+    """List available industry clusters."""
+    print("=== Industry clusters ===\n")
     response = httpx.get(
         f"{BASE_URL}/api/v1/industry-clusters/",
         headers=HEADERS,
@@ -39,30 +38,8 @@ def list_industry_clusters_httpx():
     print()
 
 
-def list_industry_clusters_requests():
-    """List available industry clusters using requests."""
-    import requests
-
-    print("=== Industry clusters — requests ===\n")
-    response = requests.get(
-        f"{BASE_URL}/api/v1/industry-clusters/",
-        headers=HEADERS,
-        timeout=30,
-    )
-    response.raise_for_status()
-    data = response.json()
-
-    print(f"Found {data['count']} industry clusters\n")
-    for cluster in data["results"][:10]:
-        names = ", ".join(cluster["representative_doc"][:3])
-        print(f"  [topic_id={cluster['topic_id']}] {names}")
-    print()
-
-
 def search_industries(query: str = "technology"):
     """Search for industry clusters by keyword."""
-    import httpx
-
     print(f"=== Searching industries for '{query}' ===\n")
     response = httpx.get(
         f"{BASE_URL}/api/v1/industry-clusters/",
@@ -82,8 +59,6 @@ def search_industries(query: str = "technology"):
 
 def stories_by_industry(industry: str = "Technology"):
     """Filter stories by industry name."""
-    import httpx
-
     print(f"=== Stories in '{industry}' industry ===\n")
     response = httpx.get(
         f"{BASE_URL}/api/v1/stories/",
@@ -103,8 +78,6 @@ def stories_by_industry(industry: str = "Technology"):
 
 def stories_by_industry_and_location():
     """Use the /stories/industry-location/ endpoint for combined filtering."""
-    import httpx
-
     print("=== Technology stories in US ===\n")
     response = httpx.get(
         f"{BASE_URL}/api/v1/stories/industry-location/",
@@ -123,8 +96,7 @@ def stories_by_industry_and_location():
 
 
 if __name__ == "__main__":
-    list_industry_clusters_httpx()
-    list_industry_clusters_requests()
+    list_industry_clusters()
     search_industries()
     stories_by_industry()
     stories_by_industry_and_location()

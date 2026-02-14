@@ -1,15 +1,16 @@
-"""Location and geography examples.
+"""Location and geography examples (httpx).
 
 Browse GeoNames locations and location groups, and filter stories by location.
 
 GeoNames locations are paginated. Location groups are returned as a flat list
 with parent/child relationships forming a hierarchy.
 
-Usage: uv run python examples/locations.py
+Usage: uv run python examples/httpx/locations.py
 """
 
 import os
 
+import httpx
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,34 +20,13 @@ API_KEY = os.environ["SYRACUSE_API_KEY"]
 HEADERS = {"Authorization": f"Token {API_KEY}"}
 
 
-def list_geonames_httpx():
-    """List available GeoNames locations using httpx."""
-    import httpx
-
-    print("=== GeoNames locations — httpx ===\n")
+def list_geonames():
+    """List available GeoNames locations."""
+    print("=== GeoNames locations ===\n")
     response = httpx.get(
         f"{BASE_URL}/api/v1/geonames/",
         headers=HEADERS,
         timeout=120.0,
-    )
-    response.raise_for_status()
-    data = response.json()
-
-    print(f"Found {data['count']} locations\n")
-    for loc in data["results"][:10]:
-        print(f"  [{loc['geonames_id']}] {loc['name']} ({loc.get('country_code', 'N/A')})")
-    print()
-
-
-def list_geonames_requests():
-    """List available GeoNames locations using requests."""
-    import requests
-
-    print("=== GeoNames locations — requests ===\n")
-    response = requests.get(
-        f"{BASE_URL}/api/v1/geonames/",
-        headers=HEADERS,
-        timeout=30,
     )
     response.raise_for_status()
     data = response.json()
@@ -62,8 +42,6 @@ def list_location_groups():
 
     Note: this endpoint returns a flat list (not paginated).
     """
-    import httpx
-
     print("=== Location groups ===\n")
     response = httpx.get(
         f"{BASE_URL}/api/v1/location-groups/",
@@ -84,8 +62,6 @@ def list_location_groups():
 
 def get_location_group_detail(group_id: str = "Americas"):
     """Get details for a specific location group, including parent/child relationships."""
-    import httpx
-
     print(f"=== Location group: {group_id} ===\n")
     response = httpx.get(
         f"{BASE_URL}/api/v1/location-groups/{group_id}/",
@@ -114,14 +90,12 @@ def stories_by_location(location: str = "France"):
 
     You can also use location_id for case-sensitive location group IDs (e.g. "US-CA", "GB").
     """
-    import httpx
-
     print(f"=== Stories in '{location}' ===\n")
     response = httpx.get(
         f"{BASE_URL}/api/v1/stories/",
         headers=HEADERS,
         params={"location": location, "days_ago": 30},
-        timeout=60.0,
+        timeout=120.0,
     )
     response.raise_for_status()
     data = response.json()
@@ -134,8 +108,7 @@ def stories_by_location(location: str = "France"):
 
 
 if __name__ == "__main__":
-    list_geonames_httpx()
-    list_geonames_requests()
+    list_geonames()
     list_location_groups()
     get_location_group_detail()
     stories_by_location()

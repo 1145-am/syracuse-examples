@@ -34,30 +34,43 @@ This returns a JSON response with your API token. Verify your email to increase 
 ## Quick start
 
 ```bash
-uv run python main.py
+uv run python main.py             # httpx
+uv run python main_requests.py    # requests
 ```
-
-This fetches the latest company news stories and prints them to the console.
 
 ## Examples
 
-| File | Description |
-|------|-------------|
-| `examples/stories.py` | List stories, filter by activity type, change output format, fetch by URI |
-| `examples/organizations.py` | Search stories by company name |
-| `examples/industries.py` | Browse industry clusters, filter stories by industry |
-| `examples/locations.py` | Browse GeoNames/location groups, filter stories by location |
-| `examples/advanced.py` | Combine filters, pagination, multiple industries/locations |
+Examples are provided in two variants — pick whichever HTTP library you prefer:
 
-Run any example:
+### httpx
 
 ```bash
-uv run python examples/stories.py
-uv run python examples/organizations.py
-uv run python examples/industries.py
-uv run python examples/locations.py
-uv run python examples/advanced.py
+uv run python examples/httpx/stories.py
+uv run python examples/httpx/organizations.py
+uv run python examples/httpx/industries.py
+uv run python examples/httpx/locations.py
+uv run python examples/httpx/advanced.py
 ```
+
+### requests
+
+```bash
+uv run python examples/requests/stories.py
+uv run python examples/requests/organizations.py
+uv run python examples/requests/industries.py
+uv run python examples/requests/locations.py
+uv run python examples/requests/advanced.py
+```
+
+### What each example covers
+
+| File | Description |
+|------|-------------|
+| `stories.py` | List stories, filter by activity type, change output format, fetch by URI |
+| `organizations.py` | Search stories by company name |
+| `industries.py` | Browse industry clusters, filter stories by industry |
+| `locations.py` | Browse GeoNames/location groups, filter stories by location |
+| `advanced.py` | Combine filters, pagination, multiple industries/locations |
 
 ## Authentication
 

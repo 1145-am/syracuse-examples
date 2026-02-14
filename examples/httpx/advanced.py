@@ -1,12 +1,13 @@
-"""Advanced usage examples.
+"""Advanced usage examples (httpx).
 
 Combining multiple filters, pagination, and other advanced patterns.
 
-Usage: uv run python examples/advanced.py
+Usage: uv run python examples/httpx/advanced.py
 """
 
 import os
 
+import httpx
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -18,8 +19,6 @@ HEADERS = {"Authorization": f"Token {API_KEY}"}
 
 def combine_filters():
     """Combine industry, location, and activity type filters."""
-    import httpx
-
     print("=== Combined filters: Technology + US + PartnershipActivity ===\n")
     response = httpx.get(
         f"{BASE_URL}/api/v1/stories/",
@@ -44,8 +43,6 @@ def combine_filters():
 
 def paginate_results():
     """Walk through paginated results."""
-    import httpx
-
     print("=== Paginating through stories ===\n")
     page = 1
     total_fetched = 0
@@ -73,8 +70,6 @@ def paginate_results():
 
 def with_and_without_similar():
     """Compare results with and without similar story grouping."""
-    import httpx
-
     print("=== With combine_similar=true (default) ===\n")
     response = httpx.get(
         f"{BASE_URL}/api/v1/stories/",
@@ -100,8 +95,6 @@ def with_and_without_similar():
 
 def multiple_industries():
     """Filter by multiple industries at once."""
-    import httpx
-
     print("=== Multiple industries: Technology, Healthcare ===\n")
     response = httpx.get(
         f"{BASE_URL}/api/v1/stories/",
@@ -120,8 +113,6 @@ def multiple_industries():
 
 def multiple_locations():
     """Filter by multiple locations at once."""
-    import httpx
-
     print("=== Multiple locations: US, GB ===\n")
     response = httpx.get(
         f"{BASE_URL}/api/v1/stories/",

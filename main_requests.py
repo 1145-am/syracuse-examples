@@ -1,17 +1,17 @@
-"""Quick-start example for the Syracuse Company News API (httpx).
+"""Quick-start example for the Syracuse Company News API (requests).
 
 Fetches recent company news stories and prints them out.
 
 Usage:
     1. Copy .env.example to .env and add your API key
-    2. Run: uv run python main.py
+    2. Run: uv run python main_requests.py
 
-For a requests version, see main_requests.py.
+For an httpx version, see main.py.
 """
 
 import os
 
-import httpx
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -23,11 +23,11 @@ HEADERS = {"Authorization": f"Token {API_KEY}"}
 
 def main():
     print("=== Fetching recent tech stories ===\n")
-    response = httpx.get(
+    response = requests.get(
         f"{BASE_URL}/api/v1/stories/",
         headers=HEADERS,
         params={"industry": "Technology", "days_ago": 7},
-        timeout=30.0,
+        timeout=30,
     )
     response.raise_for_status()
     data = response.json()
