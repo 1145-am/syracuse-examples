@@ -1,0 +1,130 @@
+"""Industry cluster examples.
+
+Browse and search industry classifications, then filter stories by industry.
+
+Industry clusters have a hierarchical structure with topic_id identifiers
+and representative_doc names (e.g. ["Appliance Services", "Appliance Care"]).
+
+Usage: uv run python examples/industries.py
+"""
+
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+BASE_URL = "https://syracuse.1145.am"
+API_KEY = os.environ["SYRACUSE_API_KEY"]
+HEADERS = {"Authorization": f"Token {API_KEY}"}
+
+
+def list_industry_clusters_httpx():
+    """List available industry clusters using httpx."""
+    import httpx
+
+    print("=== Industry clusters — httpx ===\n")
+    response = httpx.get(
+        f"{BASE_URL}/api/v1/industry-clusters/",
+        headers=HEADERS,
+        timeout=120.0,
+    )
+    response.raise_for_status()
+    data = response.json()
+
+    print(f"Found {data['count']} industry clusters\n")
+    for cluster in data["results"][:10]:
+        names = ", ".join(cluster["representative_doc"][:3])
+        print(f"  [topic_id={cluster['topic_id']}] {names}")
+    print()
+
+
+def list_industry_clusters_requests():
+    """List available industry clusters using requests."""
+    import requests
+
+    print("=== Industry clusters — requests ===\n")
+    response = requests.get(
+        f"{BASE_URL}/api/v1/industry-clusters/",
+        headers=HEADERS,
+        timeout=30,
+    )
+    response.raise_for_status()
+    data = response.json()
+
+    print(f"Found {data['count']} industry clusters\n")
+    for cluster in data["results"][:10]:
+        names = ", ".join(cluster["representative_doc"][:3])
+        print(f"  [topic_id={cluster['topic_id']}] {names}")
+    print()
+
+
+def search_industries(query: str = "technology"):
+    """Search for industry clusters by keyword."""
+    import httpx
+
+    print(f"=== Searching industries for '{query}' ===\n")
+    response = httpx.get(
+        f"{BASE_URL}/api/v1/industry-clusters/",
+        headers=HEADERS,
+        params={"search": query},
+        timeout=120.0,
+    )
+    response.raise_for_status()
+    data = response.json()
+
+    print(f"Found {data['count']} matching clusters\n")
+    for cluster in data["results"][:10]:
+        names = ", ".join(cluster["representative_doc"][:3])
+        print(f"  [topic_id={cluster['topic_id']}] {names}")
+    print()
+
+
+def stories_by_industry(industry: str = "Technology"):
+    """Filter stories by industry name."""
+    import httpx
+
+    print(f"=== Stories in '{industry}' industry ===\n")
+    response = httpx.get(
+        f"{BASE_URL}/api/v1/stories/",
+        headers=HEADERS,
+        params={"industry": industry, "days_ago": 30},
+        timeout=120.0,
+    )
+    response.raise_for_status()
+    data = response.json()
+
+    print(f"Found {data['count']} stories\n")
+    for story in data["results"][:5]:
+        print(f"  [{story['activity_class']}] {story['headline']}")
+        print(f"  Published: {story['date_published']}")
+        print()
+
+
+def stories_by_industry_and_location():
+    """Use the /stories/industry-location/ endpoint for combined filtering."""
+    import httpx
+
+    print("=== Technology stories in US ===\n")
+    response = httpx.get(
+        f"{BASE_URL}/api/v1/stories/industry-location/",
+        headers=HEADERS,
+        params={"industry": "Technology", "location": "US"},
+        timeout=120.0,
+    )
+    response.raise_for_status()
+    data = response.json()
+
+    print(f"Found {data['count']} stories\n")
+    for story in data["results"][:5]:
+        print(f"  [{story['activity_class']}] {story['headline']}")
+        print(f"  Published: {story['date_published']}")
+        print()
+
+
+if __name__ == "__main__":
+    list_industry_clusters_httpx()
+    list_industry_clusters_requests()
+    search_industries()
+    stories_by_industry()
+    stories_by_industry_and_location()

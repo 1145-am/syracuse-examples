@@ -1,7 +1,11 @@
 [project]
-name = "syracuse-client"
+name = "syracuse-examples"
 version = "0.1.0"
-description = "Add your description here"
+description = "Example scripts for the Syracuse Company News API"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "httpx",
+    "requests",
+    "python-dotenv",
+]
