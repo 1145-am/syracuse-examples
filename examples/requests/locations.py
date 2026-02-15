@@ -5,7 +5,7 @@ Browse GeoNames locations and location groups, and filter stories by location.
 GeoNames locations are paginated. Location groups are returned as a flat list
 with parent/child relationships forming a hierarchy.
 
-Usage: uv run python examples/requests/locations.py
+Usage: uv run python -m examples.requests.locations
 """
 
 import requests

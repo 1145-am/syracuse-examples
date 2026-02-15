@@ -3,7 +3,7 @@
 Look up company news by organization name using the dedicated
 /api/v1/stories/organization/ endpoint or the org_name filter on /stories/.
 
-Usage: uv run python examples/requests/organizations.py
+Usage: uv run python -m examples.requests.organizations
 """
 
 import requests

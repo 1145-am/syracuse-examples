@@ -67,21 +67,21 @@ Examples are provided in two variants — pick whichever HTTP library you prefer
 ### httpx
 
 ```bash
-uv run python examples/httpx/stories.py
-uv run python examples/httpx/organizations.py
-uv run python examples/httpx/industries.py
-uv run python examples/httpx/locations.py
-uv run python examples/httpx/advanced.py
+uv run python -m examples.httpx.stories
+uv run python -m examples.httpx.organizations
+uv run python -m examples.httpx.industries
+uv run python -m examples.httpx.locations
+uv run python -m examples.httpx.advanced
 ```
 
 ### requests
 
 ```bash
-uv run python examples/requests/stories.py
-uv run python examples/requests/organizations.py
-uv run python examples/requests/industries.py
-uv run python examples/requests/locations.py
-uv run python examples/requests/advanced.py
+uv run python -m examples.requests.stories
+uv run python -m examples.requests.organizations
+uv run python -m examples.requests.industries
+uv run python -m examples.requests.locations
+uv run python -m examples.requests.advanced
 ```
 
 ### What each example covers

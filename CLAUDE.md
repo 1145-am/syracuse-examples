@@ -30,8 +30,8 @@ uv sync
 ```bash
 uv run python main.py                          # Quick start (httpx)
 uv run python main_requests.py                 # Quick start (requests)
-uv run python examples/httpx/stories.py        # Topic-specific example
-uv run python examples/requests/stories.py     # Same, with requests
+uv run python -m examples.httpx.stories        # Topic-specific example
+uv run python -m examples.requests.stories     # Same, with requests
 ```
 
 ## Running tests
@@ -50,6 +50,7 @@ Tests use `respx` (httpx) and `responses` (requests) to mock HTTP calls. A param
 - API key loaded from `SYRACUSE_API_KEY` env var (via `python-dotenv`)
 - All API requests use `Authorization: Token <key>` header
 - Example files under `examples/httpx/` and `examples/requests/` must stay separate and independently runnable, but share config via `examples/config.py`
+- Examples must be run as modules (`python -m examples.httpx.stories`) not as scripts, because they import from the `examples` package
 - `main.py` and `main_requests.py` are intentionally self-contained (no shared imports) for copy-paste friendliness
 - Timeout: 120s for example scripts, 30s for quick-start mains
 

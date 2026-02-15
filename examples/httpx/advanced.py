@@ -2,7 +2,7 @@
 
 Combining multiple filters, pagination, and other advanced patterns.
 
-Usage: uv run python examples/httpx/advanced.py
+Usage: uv run python -m examples.httpx.advanced
 """
 
 import httpx

@@ -4,7 +4,7 @@ The /api/v1/stories/ endpoint is the main way to retrieve company news.
 You must include at least one filter: org_name, industry, or location.
 You can also filter by activity type, recency, and control output format.
 
-Usage: uv run python examples/httpx/stories.py
+Usage: uv run python -m examples.httpx.stories
 """
 
 import httpx

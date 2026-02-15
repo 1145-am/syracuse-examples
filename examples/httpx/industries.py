@@ -5,7 +5,7 @@ Browse and search industry classifications, then filter stories by industry.
 Industry clusters have a hierarchical structure with topic_id identifiers
 and representative_doc names (e.g. ["Appliance Services", "Appliance Care"]).
 
-Usage: uv run python examples/httpx/industries.py
+Usage: uv run python -m examples.httpx.industries
 """
 
 import httpx
