@@ -9,3 +9,10 @@ dependencies = [
     "requests",
     "python-dotenv",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "respx",
+    "responses",
+]
