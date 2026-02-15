@@ -82,7 +82,7 @@ def get_location_group_detail(group_id: str = "Americas"):
     print()
 
 
-def stories_by_location(location: str = "France"):
+def stories_by_location(location: str = "New Zealand"):
     """Filter stories by location.
 
     The location parameter accepts country names, ISO country codes (US, GB, FR),
