@@ -7,7 +7,7 @@ Usage: uv run python -m examples.httpx.advanced
 
 import httpx
 
-from examples.config import BASE_URL, HEADERS
+from examples.config import BASE_URL, HEADERS, print_stories
 
 
 def combine_filters():
@@ -30,7 +30,10 @@ def combine_filters():
     print(f"Found {data['count']} stories\n")
     for story in data["results"][:5]:
         print(f"  {story['headline']}")
-        print(f"  Published: {story['date_published']}")
+        print(f"  Published: {story['published_date']} by {story['published_by']}")
+        print(f"  URL: {story['document_url']}")
+        print(f"  Syracuse URI: {story['uri']}")
+        print(f"  Extract: {story['document_extract'][:120]}...")
         print()
 
 
@@ -98,10 +101,7 @@ def multiple_industries():
     response.raise_for_status()
     data = response.json()
 
-    print(f"Found {data['count']} stories\n")
-    for story in data["results"][:5]:
-        print(f"  [{story['activity_class']}] {story['headline']}")
-        print()
+    print_stories(data)
 
 
 def multiple_locations():
@@ -116,10 +116,7 @@ def multiple_locations():
     response.raise_for_status()
     data = response.json()
 
-    print(f"Found {data['count']} stories\n")
-    for story in data["results"][:5]:
-        print(f"  [{story['activity_class']}] {story['headline']}")
-        print()
+    print_stories(data)
 
 
 if __name__ == "__main__":

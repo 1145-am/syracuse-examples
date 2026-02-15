@@ -37,7 +37,10 @@ def main():
 
     for story in data["results"][:5]:
         print(f"  [{story['activity_class']}] {story['headline']}")
-        print(f"  Published: {story['date_published']}")
+        print(f"  Published: {story['published_date']} by {story['published_by']}")
+        print(f"  URL: {story['document_url']}")
+        print(f"  Syracuse URI: {story['uri']}")
+        print(f"  Extract: {story['document_extract'][:120]}...")
         print()
 
 

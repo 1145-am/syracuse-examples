@@ -61,6 +61,6 @@ Tests use `respx` (httpx) and `responses` (requests) to mock HTTP calls. A param
 - `location` param accepts country names, ISO codes (US, GB), US state codes (NY, CA), region names (Asia, Europe) -- case-insensitive
 - `industry` param does semantic vector search -- any descriptive text works
 - `/api/v1/location-groups/` returns a flat list (not paginated)
-- Story fields: `activity_class`, `headline`, `date_published`, `summary_text`, `uri`, `actors_by_role`
+- Story fields: `activity_class`, `uri`, `headline`, `document_extract`, `published_date`, `published_by`, `document_url` (consistent between full and simple output)
 - Industry clusters use `topic_id` and `representative_doc` (list of names)
 - GeoNames use `geonames_id`

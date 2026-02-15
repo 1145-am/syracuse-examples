@@ -10,7 +10,7 @@ Usage: uv run python -m examples.httpx.locations
 
 import httpx
 
-from examples.config import BASE_URL, HEADERS
+from examples.config import BASE_URL, HEADERS, print_stories
 
 
 def list_geonames():
@@ -93,11 +93,7 @@ def stories_by_location(location: str = "New Zealand"):
     response.raise_for_status()
     data = response.json()
 
-    print(f"Found {data['count']} stories\n")
-    for story in data["results"][:5]:
-        print(f"  [{story['activity_class']}] {story['headline']}")
-        print(f"  Published: {story['date_published']}")
-        print()
+    print_stories(data)
 
 
 if __name__ == "__main__":

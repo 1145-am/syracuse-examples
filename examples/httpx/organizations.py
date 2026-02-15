@@ -8,7 +8,7 @@ Usage: uv run python -m examples.httpx.organizations
 
 import httpx
 
-from examples.config import BASE_URL, HEADERS
+from examples.config import BASE_URL, HEADERS, print_stories
 
 
 def search_organization(name: str = "Microsoft"):
@@ -23,11 +23,7 @@ def search_organization(name: str = "Microsoft"):
     response.raise_for_status()
     data = response.json()
 
-    print(f"Found {data['count']} stories\n")
-    for story in data["results"][:5]:
-        print(f"  [{story['activity_class']}] {story['headline']}")
-        print(f"  Published: {story['date_published']}")
-        print()
+    print_stories(data)
 
 
 def search_via_main_endpoint(name: str = "Apple"):
@@ -42,11 +38,7 @@ def search_via_main_endpoint(name: str = "Apple"):
     response.raise_for_status()
     data = response.json()
 
-    print(f"Found {data['count']} stories\n")
-    for story in data["results"][:5]:
-        print(f"  [{story['activity_class']}] {story['headline']}")
-        print(f"  Published: {story['date_published']}")
-        print()
+    print_stories(data)
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ Usage: uv run python -m examples.requests.industries
 
 import requests
 
-from examples.config import BASE_URL, HEADERS
+from examples.config import BASE_URL, HEADERS, print_stories
 
 
 def list_industry_clusters():
@@ -62,11 +62,7 @@ def stories_by_industry(industry: str = "Technology"):
     response.raise_for_status()
     data = response.json()
 
-    print(f"Found {data['count']} stories\n")
-    for story in data["results"][:5]:
-        print(f"  [{story['activity_class']}] {story['headline']}")
-        print(f"  Published: {story['date_published']}")
-        print()
+    print_stories(data)
 
 
 def stories_by_industry_and_location():
@@ -81,11 +77,7 @@ def stories_by_industry_and_location():
     response.raise_for_status()
     data = response.json()
 
-    print(f"Found {data['count']} stories\n")
-    for story in data["results"][:5]:
-        print(f"  [{story['activity_class']}] {story['headline']}")
-        print(f"  Published: {story['date_published']}")
-        print()
+    print_stories(data)
 
 
 if __name__ == "__main__":

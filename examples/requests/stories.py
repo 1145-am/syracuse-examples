@@ -9,7 +9,7 @@ Usage: uv run python -m examples.requests.stories
 
 import requests
 
-from examples.config import BASE_URL, HEADERS
+from examples.config import BASE_URL, HEADERS, print_stories
 
 
 def list_recent_stories():
@@ -22,13 +22,7 @@ def list_recent_stories():
         timeout=120,
     )
     response.raise_for_status()
-    data = response.json()
-
-    print(f"Found {data['count']} stories\n")
-    for story in data["results"][:5]:
-        print(f"  [{story['activity_class']}] {story['headline']}")
-        print(f"  Published: {story['date_published']}")
-        print()
+    print_stories(response.json())
 
 
 def filter_by_activity_type():
@@ -45,13 +39,7 @@ def filter_by_activity_type():
         timeout=120,
     )
     response.raise_for_status()
-    data = response.json()
-
-    print(f"Found {data['count']} corporate finance stories (last 30 days)\n")
-    for story in data["results"][:5]:
-        print(f"  {story['headline']}")
-        print(f"  Published: {story['date_published']}")
-        print()
+    print_stories(response.json())
 
 
 def simple_output_format():
@@ -64,13 +52,7 @@ def simple_output_format():
         timeout=120,
     )
     response.raise_for_status()
-    data = response.json()
-
-    for story in data["results"][:5]:
-        print(f"  [{story['activity_class']}] {story['headline']}")
-        if "summary_text" in story and story["summary_text"]:
-            print(f"  Summary: {story['summary_text'][:120]}...")
-        print()
+    print_stories(response.json())
 
 
 def get_story_by_uri():
@@ -102,8 +84,11 @@ def get_story_by_uri():
 
     print(f"  Headline: {story['headline']}")
     print(f"  Activity: {story['activity_class']}")
-    print(f"  Published: {story['date_published']}")
-    if "actors_by_role" in story:
+    print(f"  Published: {story['published_date']} by {story['published_by']}")
+    print(f"  URL: {story['document_url']}")
+    print(f"  Syracuse URI: {story['uri']}")
+    print(f"  Extract: {story['document_extract'][:120]}...")
+    if story.get("actors_by_role"):
         print(f"  Actors: {story['actors_by_role']}")
     print()
 

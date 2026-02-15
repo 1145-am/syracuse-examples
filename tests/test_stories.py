@@ -35,7 +35,7 @@ def test_simple_output_format(mock_http, capsys):
 
     captured = capsys.readouterr()
     assert "Foo partners with Bar" in captured.out
-    assert "Summary:" in captured.out
+    assert "Extract:" in captured.out
 
 
 def test_get_story_by_uri(mock_http, capsys):

@@ -3,8 +3,8 @@
 STORY_FULL = {
     "activity_class": "CorporateFinanceActivity",
     "headline": "Acme Corp acquires Widget Inc for $1B",
-    "date_published": "2026-02-14T12:00:00Z",
-    "source_organization": "Test News",
+    "published_date": "2026-02-14T12:00:00Z",
+    "published_by": "Test News",
     "document_extract": "Acme Corp announced the acquisition...",
     "document_url": "https://example.com/article",
     "uri": "https://1145.am/db/12345/Acme_Widget",
@@ -15,8 +15,10 @@ STORY_SIMPLE = {
     "activity_class": "PartnershipActivity",
     "uri": "https://1145.am/db/67890/Foo_Bar_Partnership",
     "headline": "Foo partners with Bar on AI initiative",
-    "summary_text": "Foo and Bar have signed an agreement to collaborate on AI.",
-    "date_published": "2026-02-13T08:00:00Z",
+    "published_date": "2026-02-13T08:00:00Z",
+    "published_by": "Tech Daily",
+    "document_extract": "Foo and Bar have signed an agreement to collaborate on AI.",
+    "document_url": "https://example.com/foo-bar",
 }
 
 STORIES_PAGE = {
