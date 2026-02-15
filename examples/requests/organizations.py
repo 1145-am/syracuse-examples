@@ -6,16 +6,9 @@ Look up company news by organization name using the dedicated
 Usage: uv run python examples/requests/organizations.py
 """
 
-import os
-
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
-
-BASE_URL = "https://syracuse.1145.am"
-API_KEY = os.environ["SYRACUSE_API_KEY"]
-HEADERS = {"Authorization": f"Token {API_KEY}"}
+from examples.config import BASE_URL, HEADERS
 
 
 def search_organization(name: str = "Microsoft"):

@@ -8,16 +8,9 @@ with parent/child relationships forming a hierarchy.
 Usage: uv run python examples/requests/locations.py
 """
 
-import os
-
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
-
-BASE_URL = "https://syracuse.1145.am"
-API_KEY = os.environ["SYRACUSE_API_KEY"]
-HEADERS = {"Authorization": f"Token {API_KEY}"}
+from examples.config import BASE_URL, HEADERS
 
 
 def list_geonames():

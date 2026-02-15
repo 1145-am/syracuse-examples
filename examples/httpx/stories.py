@@ -7,16 +7,9 @@ You can also filter by activity type, recency, and control output format.
 Usage: uv run python examples/httpx/stories.py
 """
 
-import os
-
 import httpx
-from dotenv import load_dotenv
 
-load_dotenv()
-
-BASE_URL = "https://syracuse.1145.am"
-API_KEY = os.environ["SYRACUSE_API_KEY"]
-HEADERS = {"Authorization": f"Token {API_KEY}"}
+from examples.config import BASE_URL, HEADERS
 
 
 def list_recent_stories():

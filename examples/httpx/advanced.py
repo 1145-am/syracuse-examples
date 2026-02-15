@@ -5,16 +5,9 @@ Combining multiple filters, pagination, and other advanced patterns.
 Usage: uv run python examples/httpx/advanced.py
 """
 
-import os
-
 import httpx
-from dotenv import load_dotenv
 
-load_dotenv()
-
-BASE_URL = "https://syracuse.1145.am"
-API_KEY = os.environ["SYRACUSE_API_KEY"]
-HEADERS = {"Authorization": f"Token {API_KEY}"}
+from examples.config import BASE_URL, HEADERS
 
 
 def combine_filters():
